@@ -68,6 +68,7 @@ namespace CMS.News.DAL
 
             Guid rightUploadFile = Guid.NewGuid();
 
+            Guid rightSiteManagement = Guid.NewGuid();
             Guid rightRoleManagement = Guid.NewGuid();
             Guid rightUserManagement = Guid.NewGuid();
             Guid rightStorylineManagement = Guid.NewGuid();
@@ -89,6 +90,13 @@ namespace CMS.News.DAL
                         Code = RightName.ROLE_MANAGEMENT,
                         Name = "Quản lí vai trò",
                         Description = "Quản lí vai trò"
+                    },
+                    new Right()
+                    {
+                        Id = rightSiteManagement,
+                        Code = RightName.SITE_MANAGEMENT,
+                        Name = "Quản lí site",
+                        Description = "Quản lí site"
                     },
                     new Right()
                     {
@@ -115,6 +123,7 @@ namespace CMS.News.DAL
                 List<Guid> listActionOfAdminRole = new();
                 listActionOfAdminRole.AddRange(listActionNormalRole);
                 listActionOfAdminRole.AddRange(new List<Guid> {
+                    rightSiteManagement,
                     rightRoleManagement,
                     rightUserManagement,
                 });

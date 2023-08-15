@@ -12,6 +12,8 @@
             CreateMap<Right, RightQueryResult>();
 
             CreateMap<Role, RoleQueryResult>();
+
+            CreateMap<Site, SiteQueryResult>();
         }
     }
 }

@@ -8,6 +8,7 @@
         public DateTime CreatedTime { get; set; }
         public DateTime? UpdatedTime { get; set; }
 
+        public ICollection<Menu> Menus { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
     }
 }

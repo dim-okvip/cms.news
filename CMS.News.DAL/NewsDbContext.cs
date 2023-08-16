@@ -19,6 +19,8 @@ namespace CMS.News.DAL
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<Right> Rights { get; set; }
         public virtual DbSet<RoleRight> RoleRights { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<MenuItem> MenuItems { get; set; }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -39,6 +41,8 @@ namespace CMS.News.DAL
             modelBuilder.ApplyConfiguration(new UserRoleEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RightEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoleRightEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MenuEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MenuItemEntityTypeConfiguration());
         }
     }
 }

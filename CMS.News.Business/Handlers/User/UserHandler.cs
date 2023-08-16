@@ -81,6 +81,18 @@ namespace CMS.News.Business.Handlers
                     totalCountByFilter = allUserQuery.Count();
                 }
 
+                if (filter.SiteId.HasValue)
+                {
+                    allUserQuery = from user in allUserQuery
+                                   join ur in repositoryUserRole.GetAll()
+                                   on user.Id equals ur.UserId
+                                   join role in repositoryRole.GetAll()
+                                   on ur.RoleId equals role.Id
+                                   where ur.SiteId == filter.SiteId.Value
+                                   select user;
+                    totalCountByFilter = allUserQuery.Count();
+                }
+
                 if (filter.IsAllowLoginMultiSession.HasValue)
                 {
                     allUserQuery = from u in allUserQuery where u.IsAllowLoginMultiSession == filter.IsAllowLoginMultiSession.Value select u;

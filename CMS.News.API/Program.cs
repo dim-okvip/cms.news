@@ -84,9 +84,11 @@ app.UseCors(CORS_POLICY);
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
-app.UseSwaggerUI();
-app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BillMaker v1"));
-
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "BillMaker v1");
+    options.DefaultModelsExpandDepth(-1);
+});
 app.UseHttpsRedirection();
 
 //var cacheMaxAgeOneWeek = (60 * 60 * 24 * 7).ToString();

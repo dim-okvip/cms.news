@@ -18,6 +18,7 @@
         [Route("users")]
         [Role(Constants.CLAIM_TYPE, RightName.USER_MANAGEMENT)]
         public async Task<IActionResult> GetAllFilter([FromQuery] int? pageNumber, int? pageSize,
+            Guid? siteId,
             string? roleName, bool? isIncludeRole,
             string? textSearch,
             bool? status, bool? isAllowLoginMultiSession,
@@ -26,6 +27,7 @@
             UserQueryFilterRequest filter = new()
             {
                 PageNumber = pageNumber, PageSize = pageSize,
+                SiteId = siteId,
                 RoleName = roleName, IsIncludeRole = isIncludeRole,
                 TextSearch = textSearch,
                 Status = status, IsAllowLoginMultiSession = isAllowLoginMultiSession,

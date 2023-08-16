@@ -40,7 +40,6 @@
     public class UserQueryFilterRequest : QueryFilterRequest
     {
         public Guid? SiteId { get; set; } = null;
-        public string SiteName { get; set; } = String.Empty;
         public string RoleName { get; set; } = String.Empty;
         public bool? IsIncludeRole { get; set; } = null;
         public bool? IsAllowLoginMultiSession { get; set; } = null;

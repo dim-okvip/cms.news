@@ -16,4 +16,8 @@
     <ProjectReference Include="..\CMS.News.DAL\CMS.News.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Handlers\MenuItem\" />
+  </ItemGroup>
+
 </Project>

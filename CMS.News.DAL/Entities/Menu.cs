@@ -4,8 +4,8 @@
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public bool Status { get; set; }
         public string Description { get; set; }
+        public bool Status { get; set; }
         public Guid SiteId { get; set; }
         public Guid CreatedBy { get; set; }
         public DateTime CreatedTime { get; set; }

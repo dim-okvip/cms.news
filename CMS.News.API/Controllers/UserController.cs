@@ -33,7 +33,7 @@
                 Status = status, IsAllowLoginMultiSession = isAllowLoginMultiSession,
                 OrderBy = orderBy
             };
-            Response<List<UserQueryResult>> response = await _userHandler.GetAllAsync(filter);
+            Response<List<UserQueryResult>> response = await _userHandler.GetAsync(filter);
             return Ok(response);
         }
 
@@ -43,7 +43,7 @@
         public async Task<IActionResult> GetById(Guid id, [FromQuery] bool? isIncludeRole)
         {
             UserQueryFilterRequest filter = new() { Id = id, IsIncludeRole = isIncludeRole };
-            Response<List<UserQueryResult>> response = await _userHandler.GetAllAsync(filter);
+            Response<List<UserQueryResult>> response = await _userHandler.GetAsync(filter);
             return Ok(response);
         }
 

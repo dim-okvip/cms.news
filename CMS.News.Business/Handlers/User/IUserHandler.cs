@@ -3,7 +3,7 @@
     public interface IUserHandler
     {
         public Task<Response<UserLoginResult>> LoginAsync(UserLoginRequest user);
-        public Task<Response<List<UserQueryResult>>> GetAllAsync(UserQueryFilterRequest filter);
+        public Task<Response<List<UserQueryResult>>> GetAsync(UserQueryFilterRequest filter);
         public Task<Response<bool>> CreateAsync(CreateUserRequest request);
         public Task<Response<bool>> UpdateProfileAsync(UpdateProfileRequest request);
         public Task<Response<bool>> UpdateRoleAsync(UpdateRoleRequest request);

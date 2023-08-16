@@ -15,7 +15,7 @@
 
     public class MenuQueryFilterRequest : QueryFilterRequest
     {
-        public Guid SiteId { get; set; }
+        public Guid? SiteId { get; set; } = null;
     }
 
     public class CreateMenuRequest
@@ -26,25 +26,15 @@
         [Required]
         public bool Status { get; set; }
         
-        [Required]
         public string Description { get; set; }
 
         [Required]
         public Guid? SiteId { get; set; }
     }
     
-    public class UpdateMenuRequest
+    public class UpdateMenuRequest : CreateMenuRequest
     {
         [Required]
         public Guid? Id { get; set; }
-
-        [Required]
-        public string Name { get; set; }
-        
-        [Required]
-        public bool Status { get; set; }
-        
-        [Required]
-        public string Description { get; set; }
     }
 }

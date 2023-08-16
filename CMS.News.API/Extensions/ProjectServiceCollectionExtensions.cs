@@ -18,6 +18,7 @@
                 .AddScoped<IRightHandler, RightHandler>()
                 .AddScoped<IRoleHandler, RoleHandler>()
                 .AddScoped<IRoleRightHandler, RoleRightHandler>()
-                .AddScoped<ISiteHandler, SiteHandler>();
+                .AddScoped<ISiteHandler, SiteHandler>()
+                .AddScoped<IMenuHandler, MenuHandler>();
     }
 }

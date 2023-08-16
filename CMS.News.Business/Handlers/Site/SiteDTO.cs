@@ -1,9 +1,13 @@
 ﻿namespace CMS.News.Business.Handlers
 {
-    public class SiteQueryResult
+    public class BaseSiteQueryResult
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+    }
+
+    public class SiteQueryResult : BaseSiteQueryResult
+    {
         public string? Address { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime? UpdatedTime { get; set; }

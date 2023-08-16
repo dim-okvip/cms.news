@@ -68,7 +68,7 @@
                 int totalCount = totalCountByFilter > 0 ? totalCountByFilter : repository.Count();
 
                 if (dataCount > 0)
-                    return new Response<List<SiteQueryResult>>(status: HttpStatusCode.OK, message: "Truy vấn dữ liệu vai trò thành công", data: listSiteQueryResult, dataCount: dataCount, totalCount: totalCount);
+                    return new Response<List<SiteQueryResult>>(status: HttpStatusCode.OK, message: "Truy vấn dữ liệu site thành công", data: listSiteQueryResult, dataCount: dataCount, totalCount: totalCount);
                 else
                     return new Response<List<SiteQueryResult>>(status: HttpStatusCode.NoContent, message: "Dữ liệu không tồn tại hoặc đã bị xóa", data: listSiteQueryResult, dataCount: dataCount, totalCount: totalCount);
             }

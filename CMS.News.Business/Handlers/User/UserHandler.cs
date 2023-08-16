@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore.Storage;
-using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CMS.News.Business.Handlers
 {
@@ -28,10 +26,7 @@ namespace CMS.News.Business.Handlers
             try
             {
                 string md5Password = Utils.CreateMD5(user.Password);
-
-                IQueryable<User> users = from u in _unitOfWork.GetRepository<User>().GetAll() where u.Username == user.Username && u.Password == md5Password select u;
-
-                User? userLogin = await users.FirstOrDefaultAsync();
+                User? userLogin = await (from u in _unitOfWork.GetRepository<User>().GetAll() where u.Username == user.Username && u.Password == md5Password select u).FirstOrDefaultAsync();
                 if (userLogin is null)
                     return new Response<UserLoginResult>(status: HttpStatusCode.Forbidden, message: "Tên đăng nhập hoặc mật khẩu không chính xác", data: new UserLoginResult());
 
@@ -40,7 +35,15 @@ namespace CMS.News.Business.Handlers
 
                 UserLoginResult userLoginResult = _mapper.Map<UserLoginResult>(userLogin);
 
-                var listUserRole = await(from ur in _unitOfWork.GetRepository<UserRole>().GetAll()
+                List<Site> listSite = await (from ur in _unitOfWork.GetRepository<UserRole>().GetAll()
+                                     join s in _unitOfWork.GetRepository<Site>().GetAll()
+                                     on ur.SiteId equals s.Id
+                                     where ur.UserId == userLogin.Id
+                                     select s).Distinct().ToListAsync();
+
+                userLoginResult.ListSite = _mapper.Map<List<BaseSiteQueryResult>>(listSite);
+
+                var listUserRole = await (from ur in _unitOfWork.GetRepository<UserRole>().GetAll()
                                          join r in _unitOfWork.GetRepository<Role>().GetAll()
                                          on ur.RoleId equals r.Id
                                          where ur.UserId == userLogin.Id
@@ -58,7 +61,7 @@ namespace CMS.News.Business.Handlers
             }
         }
 
-        public async Task<Response<List<UserQueryResult>>> GetAllAsync(UserQueryFilterRequest filter)
+        public async Task<Response<List<UserQueryResult>>> GetAsync(UserQueryFilterRequest filter)
         {
             try
             {
@@ -405,7 +408,6 @@ namespace CMS.News.Business.Handlers
             }
         }
 
-
         public async Task<Response<bool>> ResetPasswordAsync(ResetPasswordRequest request)
         {
             try
@@ -434,7 +436,6 @@ namespace CMS.News.Business.Handlers
                 return new Response<bool>(status: HttpStatusCode.InternalServerError, message: ex.Message, data: false);
             }
         }
-
 
         public async Task<Response<bool>> DeleteAsync(Guid id)
         {

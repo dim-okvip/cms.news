@@ -35,6 +35,7 @@
         public bool Status { get; set; }
         public bool IsAllowLoginMultiSession { get; set; }
         public List<string> ListRole { get; set; } = new();
+        public List<BaseSiteQueryResult> ListSite { get; set; } = new();
     }
 
     public class UserQueryFilterRequest : QueryFilterRequest
@@ -67,7 +68,6 @@
         [Required]
         public Guid? SiteId { get; set; }
 
-        [Required]
         public List<Guid> ListRoleId { get; set; }
 
         [Required]

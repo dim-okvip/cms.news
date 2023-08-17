@@ -14,7 +14,7 @@
         #region Read
         [HttpGet]
         [Route("menus")]
-        [Role(Constants.CLAIM_TYPE, RightName.USER_MANAGEMENT)]
+        [Role(Constants.CLAIM_TYPE, RightName.STORYLINE_MANAGEMENT)]
         public async Task<IActionResult> GetAllFilter([FromQuery] int? pageNumber, int? pageSize, string? textSearch, Guid? siteId, Order? orderBy)
         {
             MenuQueryFilterRequest filter = new() { PageNumber = pageNumber, PageSize = pageSize, TextSearch = textSearch, SiteId = siteId, OrderBy = orderBy };
@@ -26,7 +26,7 @@
         #region CUD
         [HttpPost]
         [Route("menus")]
-        [Role(Constants.CLAIM_TYPE, RightName.USER_MANAGEMENT)]
+        [Role(Constants.CLAIM_TYPE, RightName.STORYLINE_MANAGEMENT)]
         public async Task<IActionResult> Create([FromBody] CreateMenuRequest createMenuRequest)
         {
             Response<bool> response = await _menuHandler.CreateAsync(createMenuRequest);
@@ -35,7 +35,7 @@
 
         [HttpPut]
         [Route("menus")]
-        [Role(Constants.CLAIM_TYPE, RightName.USER_MANAGEMENT)]
+        [Role(Constants.CLAIM_TYPE, RightName.STORYLINE_MANAGEMENT)]
         public async Task<IActionResult> Update([FromBody] UpdateMenuRequest updateMenuRequest)
         {
             Response<bool> response = await _menuHandler.UpdateAsync(updateMenuRequest);
@@ -44,7 +44,7 @@
 
         [HttpDelete]
         [Route("menus/{id}")]
-        [Role(Constants.CLAIM_TYPE, RightName.USER_MANAGEMENT)]
+        [Role(Constants.CLAIM_TYPE, RightName.STORYLINE_MANAGEMENT)]
         public async Task<IActionResult> Delete(Guid id)
         {
             Response<bool> response = await _menuHandler.DeleteAsync(id);

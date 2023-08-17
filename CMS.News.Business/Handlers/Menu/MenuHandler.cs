@@ -25,13 +25,22 @@
                 var allMenuQuery = from s in repository.GetAll() select s;
 
                 if (filter.Id.HasValue)
+                {
                     allMenuQuery = from s in allMenuQuery where s.Id == filter.Id.Value select s;
+                    totalCountByFilter = allMenuQuery.Count();
+                }
                 
                 if (filter.Status.HasValue)
+                {
                     allMenuQuery = from s in allMenuQuery where s.Status == filter.Status.Value select s;
-                
+                    totalCountByFilter = allMenuQuery.Count();
+                }
+
                 if (filter.SiteId.HasValue)
+                {
                     allMenuQuery = from s in allMenuQuery where s.SiteId == filter.SiteId.Value select s;
+                    totalCountByFilter = allMenuQuery.Count();
+                }
 
                 if (!String.IsNullOrEmpty(filter.TextSearch))
                 {

@@ -76,7 +76,10 @@ namespace CMS.News.Business.Handlers
                 totalCountByFilter = allUserQuery.Count();
 
                 if (filter.Id.HasValue)
+                {
                     allUserQuery = from user in allUserQuery where user.Id == filter.Id.Value select user;
+                    totalCountByFilter = allUserQuery.Count();
+                }
 
                 if (filter.Status.HasValue)
                 {

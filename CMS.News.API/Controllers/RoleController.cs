@@ -14,7 +14,7 @@
         #region Read
         [HttpGet]
         [Route("roles")]
-        [Role(Constants.CLAIM_TYPE, RightName.ROLE_MANAGEMENT)]
+        [Role(Constants.CLAIM_TYPE, RightName.USER_MANAGEMENT)]
         public async Task<IActionResult> GetAllFilter([FromQuery] int? pageNumber, int? pageSize, string? textSearch, Order? orderBy, bool? isIncludeRight)
         {
             RoleQueryFilterRequest filter = new() { PageNumber = pageNumber, PageSize = pageSize, TextSearch = textSearch, OrderBy = orderBy, IsIncludeRight = isIncludeRight };

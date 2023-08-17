@@ -17,6 +17,9 @@
             CreateMap<Site, SiteQueryResult>();
          
             CreateMap<Menu, MenuQueryResult>();
+
+            CreateMap<MenuItem, MenuItemQueryResult>();
+            CreateMap<CreateMenuItemRequest, MenuItem>();
         }
     }
 }

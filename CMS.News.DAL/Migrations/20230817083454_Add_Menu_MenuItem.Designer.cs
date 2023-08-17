@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CMS.News.DAL.Migrations
 {
     [DbContext(typeof(NewsDbContext))]
-    [Migration("20230816193724_Add_Menu_MenuItem")]
+    [Migration("20230817083454_Add_Menu_MenuItem")]
     partial class Add_Menu_MenuItem
     {
         /// <inheritdoc />
@@ -80,7 +80,7 @@ namespace CMS.News.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LargeFileUrl")
+                    b.Property<string>("FileUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -96,10 +96,6 @@ namespace CMS.News.DAL.Migrations
 
                     b.Property<Guid>("ParentId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("SmallFileUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");

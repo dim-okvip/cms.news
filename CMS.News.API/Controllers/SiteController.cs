@@ -14,7 +14,7 @@
         #region Read
         [HttpGet]
         [Route("sites")]
-        [Role(Constants.CLAIM_TYPE, RightName.SITE_MANAGEMENT)]
+        [Role(Constants.CLAIM_TYPE, RightName.USER_MANAGEMENT)]
         public async Task<IActionResult> GetAllFilter([FromQuery] int? pageNumber, int? pageSize, string? textSearch, Order? orderBy)
         {
             SiteQueryFilterRequest filter = new() { PageNumber = pageNumber, PageSize = pageSize, TextSearch = textSearch, OrderBy = orderBy };

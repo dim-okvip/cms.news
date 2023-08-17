@@ -13,7 +13,9 @@
     public enum Order
     {
         CREATED_TIME_ASC,
-        CREATED_TIME_DESC
+        CREATED_TIME_DESC,
+        ORDER_ASC,
+        ORDER_DESC,
     }
 
     public enum DataSource

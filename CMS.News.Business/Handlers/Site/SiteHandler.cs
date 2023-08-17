@@ -23,7 +23,10 @@
                 var allSiteQuery = from s in repository.GetAll() select s;
 
                 if (filter.Id.HasValue)
+                {
                     allSiteQuery = from s in allSiteQuery where s.Id == filter.Id.Value select s;
+                    totalCountByFilter = allSiteQuery.Count();
+                }
 
                 if (!String.IsNullOrEmpty(filter.TextSearch))
                 {

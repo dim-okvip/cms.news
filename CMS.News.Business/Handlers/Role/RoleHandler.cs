@@ -23,7 +23,10 @@
                 var allRoleQuery = from role in repository.GetAll() select role;
 
                 if (filter.Id.HasValue)
+                {
                     allRoleQuery = from role in allRoleQuery where role.Id == filter.Id.Value select role;
+                    totalCountByFilter = allRoleQuery.Count();
+                }
 
                 if (!String.IsNullOrEmpty(filter.TextSearch))
                 {

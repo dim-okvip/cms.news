@@ -8,8 +8,7 @@
         public string Description { get; set; }
         public string Url { get; set; }
         public Target Target { get; set; }
-        public string SmallFileUrl { get; set; }
-        public string LargeFileUrl { get; set; }
+        public string FileUrl { get; set; }
         public int Order { get; set; }
         public bool Status { get; set; }
         public Guid ParentId { get; set; }

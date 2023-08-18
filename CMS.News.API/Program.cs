@@ -86,7 +86,7 @@ app.UseCors(CORS_POLICY);
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "BillMaker v1");
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "News v1");
     options.DefaultModelsExpandDepth(-1);
 });
 app.UseHttpsRedirection();

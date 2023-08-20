@@ -14,7 +14,7 @@
         #region Read
         [HttpGet]
         [Route("menus")]
-        [Role(Constants.CLAIM_TYPE, RightName.STORYLINE_MANAGEMENT)]
+        //[Role(Constants.CLAIM_TYPE, RightName.STORYLINE_MANAGEMENT)]
         public async Task<IActionResult> GetAllFilter([FromQuery] int? pageNumber, int? pageSize, string? textSearch, Guid? siteId, Order? orderBy)
         {
             MenuQueryFilterRequest filter = new() { PageNumber = pageNumber, PageSize = pageSize, TextSearch = textSearch, SiteId = siteId, OrderBy = orderBy };

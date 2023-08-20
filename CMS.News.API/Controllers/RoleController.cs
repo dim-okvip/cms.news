@@ -15,9 +15,9 @@
         [HttpGet]
         [Route("roles")]
         [Role(Constants.CLAIM_TYPE, RightName.USER_MANAGEMENT)]
-        public async Task<IActionResult> GetAllFilter([FromQuery] int? pageNumber, int? pageSize, string? textSearch, Order? orderBy, bool? isIncludeRight)
+        public async Task<IActionResult> GetAllFilter([FromQuery] int? pageNumber, int? pageSize, string? textSearch, Order? orderBy, Guid? userId, Guid? siteId, bool? isIncludeRight)
         {
-            RoleQueryFilterRequest filter = new() { PageNumber = pageNumber, PageSize = pageSize, TextSearch = textSearch, OrderBy = orderBy, IsIncludeRight = isIncludeRight };
+            RoleQueryFilterRequest filter = new() { PageNumber = pageNumber, PageSize = pageSize, TextSearch = textSearch, OrderBy = orderBy, UserId = userId, SiteId = siteId, IsIncludeRight = isIncludeRight };
             Response<List<RoleQueryResult>> response = await _roleHandler.GetAsync(filter);
             return Ok(response);
         }
@@ -25,9 +25,9 @@
         [HttpGet]
         [Route("roles/{id}")]
         [Role(Constants.CLAIM_TYPE, RightName.ROLE_MANAGEMENT)]
-        public async Task<IActionResult> GetById(Guid id, bool? isIncludeRight)
+        public async Task<IActionResult> GetById(Guid id, Guid? userId, Guid? siteId, bool? isIncludeRight)
         {
-            RoleQueryFilterRequest filter = new() { Id = id, IsIncludeRight = isIncludeRight };
+            RoleQueryFilterRequest filter = new() { Id = id, UserId = userId, SiteId = siteId, IsIncludeRight = isIncludeRight };
             Response<List<RoleQueryResult>> response = await _roleHandler.GetAsync(filter);
             return Ok(response);
         }

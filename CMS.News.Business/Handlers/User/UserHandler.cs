@@ -35,13 +35,14 @@ namespace CMS.News.Business.Handlers
 
                 UserLoginResult userLoginResult = _mapper.Map<UserLoginResult>(userLogin);
 
-                List<Site> listSite = await (from ur in _unitOfWork.GetRepository<UserRole>().GetAll()
+                var listSiteName = await (from ur in _unitOfWork.GetRepository<UserRole>().GetAll()
                                      join s in _unitOfWork.GetRepository<Site>().GetAll()
                                      on ur.SiteId equals s.Id
                                      where ur.UserId == userLogin.Id
-                                     select s).Distinct().ToListAsync();
+                                     select new { SiteName = s.Name }).Distinct().ToListAsync();
 
-                userLoginResult.ListSite = _mapper.Map<List<BaseSiteQueryResult>>(listSite);
+                if (listSiteName is not null && listSiteName.Count() > 0)
+                    listSiteName.ForEach(item => { userLoginResult.ListSite.Add(item.SiteName); });
 
                 var listUserRole = await (from ur in _unitOfWork.GetRepository<UserRole>().GetAll()
                                          join r in _unitOfWork.GetRepository<Role>().GetAll()
@@ -159,27 +160,37 @@ namespace CMS.News.Business.Handlers
                 }
 
                 var listAllUserQuery = await allUserQuery.ToListAsync();
-                List<UserQueryResult> listResult = new();
+                List<UserQueryResult> listResult = _mapper.Map<List<UserQueryResult>>(listAllUserQuery);
 
                 if (filter.IsIncludeRole.HasValue && filter.IsIncludeRole.Value)
                 {
-                    foreach (var user in listAllUserQuery)
+                    foreach (var user in listResult)
                     {
-                        UserQueryResult userQueryResult = _mapper.Map<UserQueryResult>(user);
-                        var listUserRole = await(from ur in repositoryUserRole.GetAll()
+                        var listRoleName = await(from ur in repositoryUserRole.GetAll()
                                                  join role in repositoryRole.GetAll()
                                                  on ur.RoleId equals role.Id
                                                  where ur.UserId == user.Id
                                                  select new { RoleName = role.Name }).Distinct().ToListAsync();
 
-                        if (listUserRole is not null && listUserRole.Count() > 0)
-                            listUserRole.ForEach(item => { userQueryResult.ListRole.Add(item.RoleName); });
+                        if (listRoleName is not null && listRoleName.Count() > 0)
+                            listRoleName.ForEach(item => { user.ListRole.Add(item.RoleName); });
 
-                        listResult.Add(userQueryResult);
                     }
                 }
-                else
-                    listResult = _mapper.Map<List<UserQueryResult>>(listAllUserQuery);
+
+                if (filter.IsIncludeSite.HasValue && filter.IsIncludeSite.Value)
+                {
+                    foreach (var user in listResult)
+                    {
+                        var listSiteName = await (from ur in repositoryUserRole.GetAll()
+                                              join s in _unitOfWork.GetRepository<Site>().GetAll()
+                                                     on ur.SiteId equals s.Id
+                                                     where ur.UserId == user.Id
+                                                     select new {SiteName = s.Name}).Distinct().ToListAsync();
+                        if (listSiteName is not null && listSiteName.Count() > 0)
+                            listSiteName.ForEach(item => { user.ListSite.Add(item.SiteName); });
+                    }
+                }
 
                 int dataCount = listResult.Count;
 

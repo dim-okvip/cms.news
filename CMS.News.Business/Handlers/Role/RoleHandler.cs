@@ -19,7 +19,7 @@
             {
                 int totalCountByFilter = 0;
 
-                IRepository<Role> repository = _unitOfWork.GetRepository<Role>();
+                IRepository<Role> repository = _unitOfWork.GetRepository<Role>();   
                 var allRoleQuery = from role in repository.GetAll() select role;
 
                 if (filter.Id.HasValue)
@@ -31,6 +31,18 @@
                 if (!String.IsNullOrEmpty(filter.TextSearch))
                 {
                     allRoleQuery = from role in allRoleQuery where role.Name.Contains(filter.TextSearch) select role;
+                    totalCountByFilter = allRoleQuery.Count();
+                }
+
+                if (filter.UserId.HasValue && filter.SiteId.HasValue)
+                {
+                    allRoleQuery = from role in allRoleQuery
+                                join ur in _unitOfWork.GetRepository<UserRole>().GetAll()
+                                on role.Id equals ur.RoleId
+                                join u in _unitOfWork.GetRepository<User>().GetAll()
+                                on ur.UserId equals u.Id
+                                where ur.UserId == filter.UserId.Value && ur.SiteId == filter.SiteId.Value
+                                select role;
                     totalCountByFilter = allRoleQuery.Count();
                 }
 

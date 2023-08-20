@@ -13,7 +13,6 @@
 
             CreateMap<Role, RoleQueryResult>();
 
-            CreateMap<Site, BaseSiteQueryResult>();
             CreateMap<Site, SiteQueryResult>();
          
             CreateMap<Menu, MenuQueryResult>();

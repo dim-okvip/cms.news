@@ -20,6 +20,7 @@
         public async Task<IActionResult> GetAllFilter([FromQuery] int? pageNumber, int? pageSize,
             Guid? siteId,
             string? roleName, bool? isIncludeRole,
+            bool? isIncludeSite,
             string? textSearch,
             bool? status, bool? isAllowLoginMultiSession,
             Order? orderBy)
@@ -29,6 +30,7 @@
                 PageNumber = pageNumber, PageSize = pageSize,
                 SiteId = siteId,
                 RoleName = roleName, IsIncludeRole = isIncludeRole,
+                IsIncludeSite = isIncludeSite,
                 TextSearch = textSearch,
                 Status = status, IsAllowLoginMultiSession = isAllowLoginMultiSession,
                 OrderBy = orderBy
@@ -40,9 +42,9 @@
         [HttpGet]
         [Route("users/{id}")]
         [Role(Constants.CLAIM_TYPE, RightName.NOT_AUTHORIZATION)]
-        public async Task<IActionResult> GetById(Guid id, [FromQuery] bool? isIncludeRole)
+        public async Task<IActionResult> GetById(Guid id, [FromQuery] bool? isIncludeRole, bool? isIncludeSite)
         {
-            UserQueryFilterRequest filter = new() { Id = id, IsIncludeRole = isIncludeRole };
+            UserQueryFilterRequest filter = new() { Id = id, IsIncludeRole = isIncludeRole, IsIncludeSite = isIncludeSite };
             Response<List<UserQueryResult>> response = await _userHandler.GetAsync(filter);
             return Ok(response);
         }

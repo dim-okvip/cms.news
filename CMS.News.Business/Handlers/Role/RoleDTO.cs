@@ -12,6 +12,8 @@
 
     public class RoleQueryFilterRequest : QueryFilterRequest
     {
+        public Guid? UserId { get; set; } = null;
+        public Guid? SiteId { get; set; } = null;
         public bool? IsIncludeRight { get; set; } = null;
     }
 

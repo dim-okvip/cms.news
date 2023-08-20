@@ -10,6 +10,7 @@
         public bool Status { get; set; }
         public bool IsAllowLoginMultiSession { get; set; }
         public List<string> ListRole { get; set; } = new();
+        public List<string> ListSite { get; set; } = new();
         public Guid CreatedBy { get; set; }
         public DateTime CreatedTime { get; set; }
         public Guid UpdatedBy { get; set; }
@@ -35,7 +36,7 @@
         public bool Status { get; set; }
         public bool IsAllowLoginMultiSession { get; set; }
         public List<string> ListRole { get; set; } = new();
-        public List<BaseSiteQueryResult> ListSite { get; set; } = new();
+        public List<string> ListSite { get; set; } = new();
     }
 
     public class UserQueryFilterRequest : QueryFilterRequest
@@ -43,6 +44,7 @@
         public Guid? SiteId { get; set; } = null;
         public string RoleName { get; set; } = String.Empty;
         public bool? IsIncludeRole { get; set; } = null;
+        public bool? IsIncludeSite { get; set; } = null;
         public bool? IsAllowLoginMultiSession { get; set; } = null;
     }
 

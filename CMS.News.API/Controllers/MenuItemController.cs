@@ -14,7 +14,7 @@
         #region Read
         [HttpGet]
         [Route("menuItems")]
-        [Role(Constants.CLAIM_TYPE, RightName.STORYLINE_MANAGEMENT)]
+        //[Role(Constants.CLAIM_TYPE, RightName.STORYLINE_MANAGEMENT)]
         public async Task<IActionResult> GetAllFilter([FromQuery] int? pageNumber, int? pageSize, string? textSearch, Guid? menuId, Guid? parentId, bool? isIncludeChildMenuItem, Order? orderBy)
         {
             MenuItemQueryFilterRequest filter = new() { PageNumber = pageNumber, PageSize = pageSize, TextSearch = textSearch, MenuId = menuId, ParentId = parentId, IsIncludeChildMenuItem = isIncludeChildMenuItem, OrderBy = orderBy };
